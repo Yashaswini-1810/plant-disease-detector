@@ -1,0 +1,3 @@
+streamlit
+tensor flow
+numpy pillow
