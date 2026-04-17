@@ -1,6 +1,8 @@
 import tensorflow as tf
 import numpy as np
-
+import gdown
+url = "https://colab.research.google.com/drive/1a09kIv6OaqFJBW8y38uu9hpQoqxHEs6g?usp=sharing"
+gdown.download(url, "plant_model.h5", quiet=False)
 model = tf.keras.models.load_model(
     "plant_model.h5",
     compile=False
