@@ -1,8 +1,10 @@
 import tensorflow as tf
 import numpy as np
 
-model = tf.keras.models.load_model("plant_model.h5")
-
+model = tf.keras.models.load_model(
+    "plant_model.h5",
+    compile=False
+)
 class_names = [
     "Apple___Cedar_apple_rust",
     "Tomato___Late_blight",
