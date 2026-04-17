@@ -1,13 +1,23 @@
-import tensorflow as tf
+import os
+import gdown
 import numpy as np
+import tensorflow as tf
+
+MODEL_PATH = "plant_model.h5"
+
 file_id = "1MC6_8cqW_YSii6BD6YbyYBV3QLkkKloX"
 url = f"https://drive.google.com/uc?id={file_id}"
 
-# Download only if not exists
-if not os.path.exists("plant_model.h5"):
-    gdown.download(url, "plant_model.h5", quiet=False)
+# download safely
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model...")
+    gdown.download(url, MODEL_PATH, quiet=False)
 
-model = tf.keras.models.load_model("plant_model.h5", compile=False)
+# CHECK if file exists BEFORE loading
+if not os.path.exists(MODEL_PATH):
+    raise Exception("Model download failed!")
+
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 class_names = [
     "Apple___Cedar_apple_rust",
@@ -24,4 +34,4 @@ def predict_image(image):
     pred = model.predict(img)
     index = np.argmax(pred)
 
-    return class_names[index], np.max(pred)
+    return class_names[index], float(np.max(pred))
