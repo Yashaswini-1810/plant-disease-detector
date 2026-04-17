@@ -1,12 +1,14 @@
 import tensorflow as tf
 import numpy as np
-import gdown
-url = "https://colab.research.google.com/drive/1a09kIv6OaqFJBW8y38uu9hpQoqxHEs6g?usp=sharing"
-gdown.download(url, "plant_model.h5", quiet=False)
-model = tf.keras.models.load_model(
-    "plant_model.h5",
-    compile=False
-)
+file_id = "1MC6_8cqW_YSii6BD6YbyYBV3QLkkKloX"
+url = f"https://drive.google.com/uc?id={file_id}"
+
+# Download only if not exists
+if not os.path.exists("plant_model.h5"):
+    gdown.download(url, "plant_model.h5", quiet=False)
+
+model = tf.keras.models.load_model("plant_model.h5", compile=False)
+
 class_names = [
     "Apple___Cedar_apple_rust",
     "Tomato___Late_blight",
