@@ -15,6 +15,7 @@ MODEL_PATH = "plant_model.h5"
 file_id = "1MC6_8cqW_YSii6BD6YbyYBV3QLkkKloX"
 url = f"https://drive.google.com/uc?id={file_id}"
 if not os.path.exists("plant_model.h5"):
+    print("Downloading model...")
     gdown.download(url, "plant_model.h5", quiet=False)
 model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 class_names = [
